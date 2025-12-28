@@ -1,0 +1,25 @@
+name: Validate Walkthrough Structure
+
+on:
+  push:
+    branches:
+      - 'manual_walkthrough_*'
+  pull_request:
+    branches:
+      - main
+      - 'manual_walkthrough_*'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Run Validation Script
+        run: python3 scripts/validate_walkthrough.py
